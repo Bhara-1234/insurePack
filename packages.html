@@ -98,6 +98,7 @@
 			/* Add margin */
 			border: 1px solid #ddd;
 			/* Add a border */
+			margin-right: 200px;
 		}
 
 		/* Apply styles to form buttons */
@@ -126,31 +127,29 @@
 <body>
 	<div th:replace="header :: body"></div><br><br><br><br><br>
 	<div class="container-fluid">
+		<center>
 		<form action="filteredpackages">
-			<table>
-				<tr>
-					<th>Status:</th>
-					<td>
-						<select name="status" id="status class=" form-control"">
-							<option name="ALL">ALL</option>
-							<option name="AC">AC</option>
-							<option name="NA">NA</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>Age Limit:</th>
-					<td><input type="text" name="age" id="age" class="form-control"></td>
-				</tr>
-			</table>
-			<input type="submit" value="Search" class="btn btn-secondary">
+			Status:
+			<select name="status" id="status">
+				<option name="ALL">ALL</option>
+				<option name="AC">AC</option>
+				<option name="NA">NA</option>
+			</select><br>
+			Age Limit:
+			<input type="text" name="age" id="age">
+			<button type="submit" class="btn btn-primary">Search</button>
+
+		</form>
+		</center>
+
+
+		<form action="excel" style="margin-left:400px;">
+			<input type="hidden" id="statu" name="status">
+			<input type="hidden" id="ag" name="age"><input type="submit" value="Download Data" onclick="downloadExcel()" id="down"
+				class="btn btn-success" style="margin-right:390px;">
 		</form>
 
-		<form action="excel">
-			<input type="hidden" id="statu" name="status">
-			<input type="hidden" id="ag" name="age">
-			<input type="submit" value="Download Data" onclick="downloadExcel()" id="down" class="btn btn-primary">
-		</form>
+
 		<br>
 		<div class="panel panel-primary">
 			<div class="panel-heading pt-5">
@@ -242,6 +241,7 @@
 	</div>
 
 	<script>
+			
 		function addNewPackage() {
 			var title = document.getElementById("titleVal").value;
 			var desc = document.getElementById("descVal").value;
@@ -276,13 +276,6 @@
 			});
 		}
 
-		function downloadExcel() {
-			var status = document.getElementById("status").value;
-			var age = document.getElementById("age").value;
-			document.getElementById("statu").value = status;
-			document.getElementById("ag").value = age;
-
-		}
 
 
 		$(document).ready(function () {
@@ -451,6 +444,17 @@
 				}
 			});
 		}
+		
+		function downloadExcel() {
+			alert("hai");
+			var status = document.getElementById("status").value;
+			var age = document.getElementById("age").value;
+			alert(age + status);
+			document.getElementById("statu").value = status;
+			document.getElementById("ag").value = age;
+
+		}
+
 	</script>
 
 	<div th:replace="footer :: body"></div>
